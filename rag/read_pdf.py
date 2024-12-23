@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 
-loader=PyPDFLoader('Jayesh-Das.pdf')
+loader=PyPDFLoader('attention.pdf')
+# loader=PyPDFLoader('Jayesh-Das.pdf')
 doc=loader.load()
 # print(doc)
 # print(len(doc))
@@ -16,11 +17,12 @@ from langchain_community.vectorstores import Chroma
 
 
 # Initialize Olama embeddings
-embeddings = OllamaEmbeddings(model="llama2")
+embeddings = OllamaEmbeddings(model="paraphrase-multilingual")
 
 db = Chroma.from_documents(documents,embeddings)
 
 # print(db)
-query = "find email"
+# query = "Who are the authors of attention is all you need?"
+query = "what is Positional Encoding ?"
 retireved_results=db.similarity_search(query)
 print(retireved_results[0].page_content)
